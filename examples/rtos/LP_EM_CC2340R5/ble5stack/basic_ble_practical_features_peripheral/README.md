@@ -139,7 +139,7 @@ The [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simpleli
 
 The detailed HCI commands and events description can be found in the [Host Controller Interface (HCI)](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/hci-cc23xx.html#host-controller-interface-hci) section in BLE5-Stack User's Guide.
 
-All the code required for this demo is inside ``app_connection.c``. To change a feature set bit, firstly use ``HCI_LE_ReadLocalSupportedFeaturesCmd`` to read the currently supported local LE features:
+The code required for this demo is inside ``app_connection.c`` and ``app_peripheral.c``. To change a feature set bit, firstly use ``HCI_LE_ReadLocalSupportedFeaturesCmd`` to read the currently supported local LE features:
 
 ```
 bStatus_t Connection_start()
@@ -245,6 +245,7 @@ void Connection_HciGAPEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
               {
                   // It is safer to move BLEAppUtil_advStart to here if feature set is modified
                   // to avoid connection is established before feature set is changed.
+                  BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
                   MenuModule_printf(APP_MENU_CONN_EVENT, 0, "Feature set change - CSA#2 disabled");
                   break;
               }
@@ -259,7 +260,7 @@ void Connection_HciGAPEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
         ...
 ```
 
-Last but not least, we suggest to move the call of ``BLEAppUtil_advStart`` to the event handler to avoid the case of establishing a connection before the change of feature set. In a rare case the device will connect to a peer device before the feature set change is finished, this will misleading the peer device to use a wrong feature set which may lead to a connection failure or other unexpected behaviors.
+Last but not least, it is suggested to move the call of ``BLEAppUtil_advStart`` to the event handler to avoid the case of establishing a connection before the change of feature set. In a rare case the device will connect to a peer device before the feature set change is finished, this will misleading the peer device to use a wrong feature set which may lead to a connection failure or other unexpected behaviors.
 
 Register connection event callback to get RSSI
 ==============================================
