@@ -128,6 +128,13 @@ static App_connInfo connectionConnList[MAX_NUM_BLE_CONNS];
 BLEAppUtil_timerHandle paramUpdateReqClockHandle;
 #endif // #ifdef PARAM_UPDATE_REQ_AFTER_CLOCK_TIMEOUT
 
+#ifdef DISABLE_CSA2
+//! Store handle needed for each advertise set
+extern uint8 peripheralAdvHandle_1;
+//! Advertise param, needed for each advertise set, Generate by Sysconfig
+extern const BLEAppUtil_AdvStart_t advSetStartParamsSet_1;
+#endif // #ifdef DISABLE_CSA2
+
 //*****************************************************************************
 //! Functions
 //*****************************************************************************
@@ -373,6 +380,7 @@ void Connection_HciGAPEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
               {
                   // It is safer to move BLEAppUtil_advStart to here if feature set is modified
                   // to avoid connection is established before feature set is changed.
+                  BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
                   MenuModule_printf(APP_MENU_CONN_EVENT, 0, "Feature set change - CSA#2 disabled");
                   break;
               }

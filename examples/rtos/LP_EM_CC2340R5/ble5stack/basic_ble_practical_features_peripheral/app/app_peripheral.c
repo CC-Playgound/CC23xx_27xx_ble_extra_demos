@@ -246,12 +246,14 @@ bStatus_t Peripheral_start()
         return(status);
     }
 
+#ifndef DISABLE_CSA2
     status = BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
     if(status != SUCCESS)
     {
         // Return status value
         return(status);
     }
+#endif // #ifdef DISABLE_CSA2
 
     // Return status value
     return(status);
