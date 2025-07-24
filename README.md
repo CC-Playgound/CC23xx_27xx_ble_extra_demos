@@ -2,7 +2,7 @@
 
 基于TI CC23xx和CC27xx系列芯片的BLE demo合集. 所有demo均基于SimpleLink F3 SDK开发，目的是演示一些常用的BLE功能
 
-# 环境搭建
+## 环境搭建
 
 Demo需要运行在CC23xx或CC27xx开发板上，导入工程前请先下载SimpleLink F3 SDK
 
@@ -25,7 +25,7 @@ Demo基于CC23xx或CC27xx开发板，根据工程所在文件夹名称选择对�
 - [SimpleLink Connect Application on Android](https://play.google.com/store/apps/details?id=com.ti.connectivity.simplelinkconnect)
 - [SimpleLink Connect Application source code](https://www.ti.com/tool/SIMPLELINK-CONNECT-SW-MOBILE-APP)
 
-# Demo列表
+## Demo列表
 
 <table>
   <tbody>
