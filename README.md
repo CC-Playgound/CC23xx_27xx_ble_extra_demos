@@ -52,6 +52,12 @@ Demo基于CC23xx或CC27xx开发板，根据工程所在文件夹名称选择对�
       </td>
     </tr>
     <tr>
+      <td>BLE_Throughput_test</td>
+      <td>LP-EM-CC2340R5</td>
+      <td>
+        基于 basic_ble 例程做的吞吐率测试
+    </tr>
+    <tr>
       <td>Two_diffAddr_ADV</td>
       <td>LP-EM-CC2745R10-Q1</td>
       <td>实现两路基于不同地址类型的广播</td>
@@ -60,6 +66,12 @@ Demo基于CC23xx或CC27xx开发板，根据工程所在文件夹名称选择对�
       <td>Connection Monitor</td>
       <td>LP-EM-CC2745R10-Q1, LP-EM-CC2340R5</td>
       <td>使用手机 或 keynode demo (keynode 可使用 CC2340) 连接 CMS，实现 CMS 从 Connection Event 提取 RSSI 和 Connection Montior Role 的逻辑， 两个板子之间通过 UART 连接传递数据</td>
+    </tr>
+    <tr>
+      <td>CS_CM_UART_demo</td>
+      <td>LP-EM-CC2745R10</td>
+      <td>
+        基于 car_node 例程做的 CS+CM_UART 合并 demo
     </tr>
     <tr>
       <td>PAwR_CC2340_CC2745</td>
