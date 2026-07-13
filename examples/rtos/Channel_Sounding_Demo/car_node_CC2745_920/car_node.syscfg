@@ -1,0 +1,134 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/LP_EM_CC2745R10_Q1" --device "CC2745R10RHAQ1" --part "Default" --package "RHA" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@9.20.00.81"
+ * @v2CliArgs --board "/ti/boards/LP_EM_CC2745R10_Q1" --device "CC2745R10-Q1" --package "VQFN (RHA)" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@9.20.00.81"
+ * @versions {"tool":"1.26.3+4529"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const FreeRTOS = scripting.addModule("/freertos/FreeRTOS");
+const ble      = scripting.addModule("/ti/ble/ble");
+const CCFG     = scripting.addModule("/ti/devices/CCFG");
+const rfdesign = scripting.addModule("/ti/devices/radioconfig/rfdesign");
+const GPIO     = scripting.addModule("/ti/drivers/GPIO", {}, false);
+const GPIO1    = GPIO.addInstance();
+const GPIO2    = GPIO.addInstance();
+const NVS      = scripting.addModule("/ti/drivers/NVS");
+const NVS1     = NVS.addInstance();
+const Power    = scripting.addModule("/ti/drivers/Power");
+const RCL      = scripting.addModule("/ti/drivers/RCL");
+const RNG      = scripting.addModule("/ti/drivers/RNG");
+const UART2    = scripting.addModule("/ti/drivers/UART2", {}, false);
+const UART21   = UART2.addInstance();
+const Settings = scripting.addModule("/ti/posix/freertos/Settings");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+FreeRTOS.heapSize       = 0x00010000;
+FreeRTOS.timerStackSize = 0x00000190;
+FreeRTOS.idleStackSize  = 0x00000130;
+
+ble.basicBLE                                        = true;
+ble.deviceName                                      = "Car Node";
+ble.maxPDUSize                                      = 255;
+ble.appExternalControlMode                          = true;
+ble.L2CAPCOC                                        = true;
+ble.maxConnNum                                      = 6;
+ble.numOfAdvSets                                    = 1;
+ble.maxRLSize                                       = 6;
+ble.maxBonds                                        = 6;
+ble.connectionMonitorRole                           = true;
+ble.channelSounding                                 = true;
+ble.csMeasureDistance                               = true;
+ble.rangingClient                                   = true;
+ble.connIntMin                                      = 30;
+ble.connIntMax                                      = 30;
+ble.scanDuration                                    = 5000;
+ble.dupFilter                                       = "SCAN_FLT_DUP_DISABLE";
+ble.disableDisplayModule                            = true;
+ble.numAntennas                                     = 2;
+ble.bondIOCaps                                      = "GAPBOND_IO_CAP_NO_INPUT_NO_OUTPUT";
+ble.bondPairing                                     = "GAPBOND_PAIRING_MODE_INITIATE";
+ble.centraSupTimeout                                = 2000;
+ble.addressMode                                     = "ADDRMODE_PUBLIC";
+ble.scanType                                        = "SCAN_TYPE_PASSIVE";
+ble.centralScanInt                                  = 30;
+ble.centralScanWin                                  = 13.75;
+ble.deviceRole                                      = "PERIPHERAL_CFG+CENTRAL_CFG";
+ble.maxPDUNum                                       = 20;
+ble.scanInt                                         = 1000;
+ble.defaultTxPowerValue                             = "10";
+ble.antennasMuxValues                               = 0xC6;
+ble.radioConfig.codeExportConfig.$name              = "ti_devices_radioconfig_code_export_param0";
+ble.adcNoiseConfig.codeExportConfig.$name           = "ti_devices_radioconfig_code_export_param1";
+ble.bleCsConfig.codeExportConfig.$name              = "ti_devices_radioconfig_code_export_param2";
+ble.connUpdateParamsPeripheral.$name                = "ti_ble_general_ble_conn_update_params0";
+ble.advSet1.$name                                   = "ti_ble_broadcaster_advertisement_set0";
+ble.advSet1.advParam1.$name                         = "ti_ble_broadcaster_advertisement_params0";
+ble.advSet1.advParam1.primIntMin                    = 115;
+ble.advSet1.advParam1.primIntMax                    = 115;
+ble.advSet1.advData1.$name                          = "ti_ble_broadcaster_advertisement_data0";
+ble.advSet1.advData1.GAP_ADTYPE_LOCAL_NAME_COMPLETE = true;
+ble.advSet1.scanRes1.$name                          = "ti_ble_broadcaster_advertisement_data1";
+ble.advSet1.scanRes1.GAP_ADTYPE_LOCAL_NAME_COMPLETE = false;
+ble.advSet1.scanRes1.GAP_ADTYPE_POWER_LEVEL         = false;
+ble.rng.$name                                       = "CONFIG_RNG_0";
+ble.aesccm.$name                                    = "CONFIG_AESCCM_0";
+ble.ecdh.$name                                      = "CONFIG_ECDH_0";
+ble.aesctrdrbg.$name                                = "CONFIG_AESCTRDRBG_0";
+ble.aesecb.$name                                    = "CONFIG_AESECB_0";
+ble.APULPF3.$name                                   = "ti_drivers_APU0";
+ble.connUpdateParamsCentral.$name                   = "ti_ble_general_ble_conn_update_params1";
+
+CCFG.ccfgTemplate.$name = "ti_devices_CCFG_CCFGCC27XXTemplate0";
+
+GPIO1.$name     = "CONFIG_GPIO_0";
+GPIO1.$hardware = system.deviceData.board.components.LED_RED;
+
+GPIO2.$name     = "CONFIG_GPIO_1";
+GPIO2.$hardware = system.deviceData.board.components.LED_GREEN;
+
+NVS1.$name                    = "CONFIG_NVSINTERNAL";
+NVS1.internalFlash.$name      = "ti_drivers_nvs_NVSLPF30";
+NVS1.internalFlash.regionBase = 0xE5000;
+NVS1.internalFlash.regionSize = 0x3000;
+
+RCL.pbeGpoMask = 0x0C;
+RCL.signals    = ["PBEGPO2","PBEGPO3","RFEGPO0","RFEGPO1"];
+
+RNG.rngReturnBehavior = "RNG_RETURN_BEHAVIOR_BLOCKING";
+
+UART21.$name     = "CONFIG_UART2_0";
+UART21.$hardware = system.deviceData.board.components.XDS110UART;
+
+const AESCommonXXF3 = scripting.addModule("/ti/drivers/cryptoutils/aes/AESCommonXXF3", {}, false);
+
+/**
+ * References between modules.
+ */
+CCFG.defaultLfoscCompProfile = null;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+GPIO1.gpioPin.$suggestSolution                       = "boosterpack.36";
+GPIO2.gpioPin.$suggestSolution                       = "boosterpack.19";
+RCL.lrfGpio.$suggestSolution                         = "LRF";
+RCL.lrfGpio.rfegpo0Pin.$suggestSolution              = "boosterpack.10";
+RCL.lrfGpio.rfegpo1Pin.$suggestSolution              = "boosterpack.9";
+RCL.lrfGpio.pbegpo2Pin.$suggestSolution              = "boosterpack.6";
+RCL.lrfGpio.pbegpo3Pin.$suggestSolution              = "boosterpack.2";
+UART21.uart.$suggestSolution                         = "UART0";
+UART21.uart.dmaTxChannel.$suggestSolution            = "DMA_CH2";
+UART21.uart.dmaRxChannel.$suggestSolution            = "DMA_CH3";
+UART21.uart.txPin.$suggestSolution                   = "boosterpack.4";
+UART21.uart.rxPin.$suggestSolution                   = "boosterpack.3";
+AESCommonXXF3.laes.$suggestSolution                  = "LAES";
+AESCommonXXF3.laes.dataLaesChannelA.$suggestSolution = "DMA_CH4";
+AESCommonXXF3.laes.dataLaesChannelB.$suggestSolution = "DMA_CH5";

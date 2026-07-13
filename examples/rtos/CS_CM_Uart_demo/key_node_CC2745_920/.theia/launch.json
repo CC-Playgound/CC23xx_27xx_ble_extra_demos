@@ -1,0 +1,16 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "key_node_CC2745",
+      "type": "ccs-debug",
+      "request": "launch",
+      "projectInfo": {
+        "name": "key_node_CC2745",
+        "resourceId": "/key_node_CC2745"
+      }
+    }
+  ]
+}
