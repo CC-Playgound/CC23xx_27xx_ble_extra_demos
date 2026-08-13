@@ -28,6 +28,6 @@
 
 # 注意
 
-1. #### Velocity还正在调试，当前还不可用。
+1. Velocity正值代表Key Node远离Car Node，负值则为靠近。
 2. Channel Sounding的参数默认使用1x1的天线，可以在car node里面进行调整，参考channel sounding demo目录下的readme。
 3. Channel Sounding Distance的精度还在进一步优化。

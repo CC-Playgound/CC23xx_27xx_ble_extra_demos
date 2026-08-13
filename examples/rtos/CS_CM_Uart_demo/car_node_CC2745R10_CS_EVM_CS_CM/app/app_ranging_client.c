@@ -79,6 +79,7 @@ static void AppRREQ_csCapTimerCB(uintptr_t arg);
 static void AppRREQ_csCapInvokeCallback(char *pData);
 static void AppRREQ_CSEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData);
 static bool AppRREQ_extEvtHandler(AppRREQEventType_e event, BLEAppUtil_msgHdr_t *pMsgData);
+extern int uart_printf(const char *fmt, ...);
 
 // Contains the inputs for the enable API to be passed to the timer
 typedef struct

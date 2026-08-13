@@ -45,7 +45,8 @@ ble.channelSounding                                 = true;
 ble.rangingServer                                   = true;
 ble.defaultTxPowerValue                             = "10";
 ble.numAntennas                                     = 2;
-ble.antennasMuxValues                               = 0xC6;
+ble.antennasMuxValues                               = 0x6;
+ble.rangingServerRealTimeFeature                    = true;
 ble.radioConfig.codeExportConfig.$name              = "ti_devices_radioconfig_code_export_param0";
 ble.adcNoiseConfig.codeExportConfig.$name           = "ti_devices_radioconfig_code_export_param1";
 ble.bleCsConfig.codeExportConfig.$name              = "ti_devices_radioconfig_code_export_param2";
@@ -71,7 +72,7 @@ NVS1.internalFlash.regionBase = 0xE5000;
 NVS1.internalFlash.regionSize = 0x3000;
 
 RCL.pbeGpoMask = 0x0C;
-RCL.signals    = ["PBEGPO2","PBEGPO3"];
+RCL.signals    = ["PBEGPO2","PBEGPO3","RFEGPO0","RFEGPO1"];
 
 RNG.rngReturnBehavior = "RNG_RETURN_BEHAVIOR_BLOCKING";
 
@@ -94,6 +95,8 @@ CCFG.defaultLfoscCompProfile = null;
  * re-solve from scratch.
  */
 RCL.lrfGpio.$suggestSolution                         = "LRF";
+RCL.lrfGpio.rfegpo0Pin.$suggestSolution              = "boosterpack.10";
+RCL.lrfGpio.rfegpo1Pin.$suggestSolution              = "boosterpack.9";
 RCL.lrfGpio.pbegpo2Pin.$suggestSolution              = "boosterpack.6";
 RCL.lrfGpio.pbegpo3Pin.$suggestSolution              = "boosterpack.2";
 Button1.button.$suggestSolution                      = "boosterpack.30";

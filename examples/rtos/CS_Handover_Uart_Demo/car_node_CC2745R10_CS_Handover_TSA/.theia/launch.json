@@ -1,0 +1,16 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "car_node_CC2745R10_CS_EVM_freertos_ticlang_embedded_sdk_9_20_01_21",
+      "type": "ccs-debug",
+      "request": "launch",
+      "projectInfo": {
+        "name": "car_node_CC2745R10_CS_EVM_freertos_ticlang_embedded_sdk_9_20_01_21",
+        "resourceId": "/car_node_CC2745R10_CS_EVM_freertos_ticlang_embedded_sdk_9_20_01_21"
+      }
+    }
+  ]
+}

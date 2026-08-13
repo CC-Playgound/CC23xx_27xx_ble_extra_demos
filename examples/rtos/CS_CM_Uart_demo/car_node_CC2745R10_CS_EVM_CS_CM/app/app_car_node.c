@@ -517,25 +517,6 @@ int uart_printf(const char *fmt, ...)
 
 #endif
 
-
-#include <ti/drivers/cryptoutils/sharedresources/CommonResourceXXF3.h>
-/* Task function */
-void MyCanTaskFxn(void* a0)
-{
-    while (1) /* Run loop forever (unless terminated) */
-        {
-            for(int i=0; i<100; i++)
-            {
-                CommonResourceXXF3_acquireLock(SemaphoreP_WAIT_FOREVER);
-                GPIO_toggle(12);
-                CommonResourceXXF3_releaseLock();
-            }
-            
-            
-            vTaskDelay(1 / portTICK_PERIOD_MS);
-        }
-}
-
 //*****************************************************************************
 //! Functions
 //*****************************************************************************
@@ -1391,12 +1372,12 @@ void CarNode_handleDistanceResults(uint16_t connHandle, CSProcess_Results_t dist
       if (finalResults.confidence != 100) {
         confidence_0++;
       }
-      
+      GPIO_toggle(16);
       uint32_t _interval = (uint32_t)(distance_current - distance_last) / 1000;
 
       successCount++;
-      uart_printf("Cnt: %d, Success: %d, C=0: %d, Distance: %d, Q: %d, V:%d, "
-                  "C: %d, I: %d ms\r\n",
+      uart_printf("Cnt: %d, Success: %d, C=0: %d, Distance: %d, Q: %d, "
+                  "V:%dcm/s, C: %d, I: %dms\r\n",
                   cnt, successCount, confidence_0, finalResults.distance,
                   finalResults.quality, finalResults.velocity,
                   finalResults.confidence, _interval);
@@ -1406,7 +1387,11 @@ void CarNode_handleDistanceResults(uint16_t connHandle, CSProcess_Results_t dist
     }
 
 #ifndef REPETITION
-        CS_procedureStart(connHandle, CS_ENABLE);
+      bStatus_t _status = CS_procedureStart(connHandle, CS_ENABLE);
+      if(_status)
+      {
+        uart_printf("CS_procedureStart Status: %d\r\n", _status);
+      }
 #endif
     distance_last = distance_current;
 
@@ -2953,8 +2938,9 @@ void CarNode_csEvtHandler(csEvtHdr_t *pCsEvt)
     {
         
         CS_procEnableCompleteEvt_t *pEnable = (CS_procEnableCompleteEvt_t *)pCsEvt;
+        uart_printf("CS_PROCEDURE_ENABLE_COMPLETE_EVENT\r\n");
         #ifdef DEBUG
-        uart_printf("%d: CS_PROCEDURE_ENABLE_COMPLETE_EVENT, status:%d\r\n",ClockP_getSystemTicks(), pEnable->csStatus);
+        uart_printf("CS_PROCEDURE_ENABLE_COMPLETE_EVENT, status:%d\r\n",ClockP_getSystemTicks(), pEnable->csStatus);
         #endif
         if (pEnable->csStatus != CS_STATUS_SUCCESS)
         {
@@ -3284,9 +3270,11 @@ void CarNode_connEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
                 CarNode_clearConfigurationParams(gapTermMsg->connectionHandle);
             }
 #endif
-            // UART2_write(uart, "disconnected!\r\n", 13, NULL);
-            uart_printf("disconnect! :%d\r\n", gapTermMsg->reason);
-            // Connection_unregisterConnEventCmd();
+
+            uart_printf("Disconnect! :%d\r\n", gapTermMsg->reason);
+
+            CarNode_startScan();
+
             break;
         }
 

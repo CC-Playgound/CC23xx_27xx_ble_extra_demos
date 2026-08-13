@@ -1707,7 +1707,7 @@ csProcessStatus_e csProcess_CalcResults(CSProcess_Results_t *csResults)
             csResults->distance = (uint32_t) (results.distance * 100);
             csResults->quality = (uint32_t) (results.quality * 100);
             csResults->confidence = (uint32_t) (results.confidence * 100);
-            csResults->velocity = (uint32_t) (results.velocity * 100);
+            csResults->velocity = (int32_t) (results.velocity * 100);
         }
 
 #ifdef CS_PROCESS_EXT_RESULTS
