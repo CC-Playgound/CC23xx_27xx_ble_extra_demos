@@ -87,6 +87,11 @@ Demo基于CC23xx或CC27xx开发板，根据工程所在文件夹名称选择对�
         基于 car_node 例程做的 CS Handover demo
     </tr>
     <tr>
+      <td>ext_led_control</td>
+      <td>LP-EM-CC2340R53</td>
+      <td>使用 LGPTimer 作为主 MCU 控制外部 LED driver 的 bit1 和 bit0 </td>
+    </tr>
+    <tr>
       <td>PAwR_CC2340_CC2745</td>
       <td>LP-EM-CC2745R10-Q1, LP-EM-CC2340R5</td>
       <td>专为基于 BLE 的 TPMS 应用设计，不适用于 ESL 应用 </td>
