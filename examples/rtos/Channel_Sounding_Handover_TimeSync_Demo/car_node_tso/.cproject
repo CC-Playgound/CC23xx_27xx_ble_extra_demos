@@ -13,7 +13,7 @@
                 </extensions>
             </storageModule>
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.TMS470.Release.179911345" name="Release" parent="com.ti.ccstudio.buildDefinitions.TMS470.Release" postbuildStep="             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_CCFG -o ${BuildArtifactFileBaseName}.out;             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_SCFG -o ${BuildArtifactFileBaseName}.out;             ${CG_TOOL_ROOT}/bin/tiarmobjcopy -O ihex ${BuildArtifactFileBaseName}.out ${BuildArtifactFileBaseName}.hex         ">
+                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.TMS470.Release.179911345" name="Release" parent="com.ti.ccstudio.buildDefinitions.TMS470.Release" postbuildStep="             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_CCFG -o ${BuildArtifactFileBaseName}.out;             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_SCFG -o ${BuildArtifactFileBaseName}.out;             ${CG_TOOL_ROOT}/bin/tiarmobjcopy -O ihex ${BuildArtifactFileBaseName}.out ${BuildArtifactFileBaseName}.hex         ">
                     <folderInfo id="com.ti.ccstudio.buildDefinitions.TMS470.Release.179911345." name="/" resourcePath="">
                         <toolChain id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.ReleaseToolchain.807109042" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.ReleaseToolchain" targetTool="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.linkerRelease.323599273">
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.1523001976" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
@@ -25,7 +25,7 @@
                                 <listOptionValue value="RUNTIME_SUPPORT_LIBRARY="/>
                                 <listOptionValue value="OUTPUT_TYPE=executable"/>
                                 <listOptionValue value="PRODUCTS=com.ti.SIMPLELINK_LOWPOWER_F3_SOURCE_SDK:9.20.1.21;sysconfig:1.27.1;"/>
-                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;com.ti.SIMPLELINK_LOWPOWER_F3_SOURCE_SDK&quot;:[&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARIES}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYMBOLS}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYSCONFIG_MANIFEST}&quot;],&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;]}"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;com.ti.SIMPLELINK_LOWPOWER_F3_SOURCE_SDK&quot;:[&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARIES}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYMBOLS}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYSCONFIG_MANIFEST}&quot;],&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;]}"/>
                             </option>
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.763097729" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="TICLANG_4.0.4.LTS" valueType="string"/>
                             <targetPlatform id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.targetPlatformRelease.1982678862" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.targetPlatformRelease"/>
@@ -34,25 +34,25 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.OPT_LEVEL.release.1458386809" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.OPT_LEVEL.release" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.OPT_LEVEL.z" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.ENDIAN_NESS__BIG_LITTLE.490305910" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.ENDIAN_NESS__BIG_LITTLE" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.ENDIAN_NESS__BIG_LITTLE.MLITTLE_ENDIAN" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.INCLUDE_PATH.1098341949" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.INCLUDE_PATH" valueType="includePath">
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INCLUDE_PATH}"/>
                                     <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
                                     <listOptionValue value="${PROJECT_ROOT}"/>
                                     <listOptionValue value="${PROJECT_ROOT}/${ConfigName}"/>
                                     <listOptionValue value="${PROJECT_LOC}/app/inc"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/common/cc26xx"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/bootutil/include"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/ti/source/mcuboot_app"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/common/cc26xx/flash_interface"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/common/cc26xx"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/bootutil/include"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/ti/source/mcuboot_app"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/common/cc26xx/flash_interface"/>
                                     <listOptionValue value="${PROJECT_LOC}/app"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mbedtls/include"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mbedtls/ti"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/drivers/rcl"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/posix/ticlang"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/kernel/freertos"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/freertos/include"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/freertos/portable/GCC/ARM_CM33_NTZ/non_secure"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mbedtls/include"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mbedtls/ti"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/drivers/rcl"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/posix/ticlang"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/kernel/freertos"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/freertos/include"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/freertos/portable/GCC/ARM_CM33_NTZ/non_secure"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE.1587575394" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYMBOLS}"/>
@@ -72,8 +72,8 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE_FUNCTIONS_IN_THEIR_OWN_SECTIONS.374664729" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE_FUNCTIONS_IN_THEIR_OWN_SECTIONS" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE_FUNCTIONS_IN_THEIR_OWN_SECTIONS.FFUNCTION_SECTIONS" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.GENERATE_DWARF_DEBUG.794273200" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.GENERATE_DWARF_DEBUG" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.GENERATE_DWARF_DEBUG.G_LOWERCASE" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.CMD_FILE.24388955" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.CMD_FILE" valueType="stringList">
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/build_components.opt"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/factory_config.opt"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/build_components.opt"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/factory_config.opt"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.W.1187598031" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.W" valueType="stringList">
                                     <listOptionValue value="unused-function"/>
@@ -93,7 +93,7 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.SEARCH_PATH.1896686228" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.SEARCH_PATH" valueType="libPaths">
                                     <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARY_PATH}"/>
                                     <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source"/>
                                     <listOptionValue value="${PROJECT_BUILD_DIR}/syscfg"/>
                                     <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
                                 </option>
@@ -110,7 +110,7 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.614630853" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
                                     <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYSCONFIG_MANIFEST}"/>
                                     <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/.metadata/product.json"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/.metadata/product.json"/>
                                 </option>
                             </tool>
                         </toolChain>
@@ -131,7 +131,7 @@
                 </extensions>
             </storageModule>
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.2061803967" name="Debug" parent="com.ti.ccstudio.buildDefinitions.TMS470.Debug" postbuildStep="             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_CCFG -o ${BuildArtifactFileBaseName}.out;             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_SCFG -o ${BuildArtifactFileBaseName}.out;             ${CG_TOOL_ROOT}/bin/tiarmobjcopy -O ihex ${BuildArtifactFileBaseName}.out ${BuildArtifactFileBaseName}.hex         ">
+                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.2061803967" name="Debug" parent="com.ti.ccstudio.buildDefinitions.TMS470.Debug" postbuildStep="             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_CCFG -o ${BuildArtifactFileBaseName}.out;             ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/common/crc_tool/crc_tool patch-image --elf ${BuildArtifactFileBaseName}.out --symbol-prefix ti_utils_build_GenMap_sym_CRC_SCFG -o ${BuildArtifactFileBaseName}.out;             ${CG_TOOL_ROOT}/bin/tiarmobjcopy -O ihex ${BuildArtifactFileBaseName}.out ${BuildArtifactFileBaseName}.hex         ">
                     <folderInfo id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.2061803967." name="/" resourcePath="">
                         <toolChain id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.DebugToolchain.1367382873" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.linkerDebug.396674694">
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.660528137" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
@@ -143,7 +143,7 @@
                                 <listOptionValue value="RUNTIME_SUPPORT_LIBRARY="/>
                                 <listOptionValue value="OUTPUT_TYPE=executable"/>
                                 <listOptionValue value="PRODUCTS=com.ti.SIMPLELINK_LOWPOWER_F3_SOURCE_SDK:9.20.1.21;sysconfig:1.27.1;"/>
-                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;com.ti.SIMPLELINK_LOWPOWER_F3_SOURCE_SDK&quot;:[&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARIES}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYMBOLS}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYSCONFIG_MANIFEST}&quot;],&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;]}"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;com.ti.SIMPLELINK_LOWPOWER_F3_SOURCE_SDK&quot;:[&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARIES}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYMBOLS}&quot;,&quot;${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYSCONFIG_MANIFEST}&quot;],&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;]}"/>
                             </option>
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.587069240" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="TICLANG_4.0.4.LTS" valueType="string"/>
                             <targetPlatform id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.targetPlatformDebug.725536243" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.targetPlatformDebug"/>
@@ -152,25 +152,25 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.GENERATE_DWARF_DEBUG.151906686" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.GENERATE_DWARF_DEBUG" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.GENERATE_DWARF_DEBUG.G_LOWERCASE" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.ENDIAN_NESS__BIG_LITTLE.219968898" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.ENDIAN_NESS__BIG_LITTLE" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.ENDIAN_NESS__BIG_LITTLE.MLITTLE_ENDIAN" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.INCLUDE_PATH.594402364" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.INCLUDE_PATH" valueType="includePath">
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INCLUDE_PATH}"/>
                                     <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
                                     <listOptionValue value="${PROJECT_ROOT}"/>
                                     <listOptionValue value="${PROJECT_ROOT}/${ConfigName}"/>
                                     <listOptionValue value="${PROJECT_LOC}/app/inc"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/common/cc26xx"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/bootutil/include"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/ti/source/mcuboot_app"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/common/cc26xx/flash_interface"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/common/cc26xx"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/bootutil/include"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mcuboot/boot/ti/source/mcuboot_app"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/common/cc26xx/flash_interface"/>
                                     <listOptionValue value="${PROJECT_LOC}/app"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mbedtls/include"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/mbedtls/ti"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/drivers/rcl"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/posix/ticlang"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/kernel/freertos"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/freertos/include"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/third_party/freertos/portable/GCC/ARM_CM33_NTZ/non_secure"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mbedtls/include"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/mbedtls/ti"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/drivers/rcl"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/posix/ticlang"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/kernel/freertos"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/freertos/include"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/third_party/freertos/portable/GCC/ARM_CM33_NTZ/non_secure"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE.803200194" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYMBOLS}"/>
@@ -190,8 +190,8 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE_FUNCTIONS_IN_THEIR_OWN_SECTIONS.2094329194" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE_FUNCTIONS_IN_THEIR_OWN_SECTIONS" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE_FUNCTIONS_IN_THEIR_OWN_SECTIONS.FFUNCTION_SECTIONS" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.OPT_LEVEL.1339142869" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.OPT_LEVEL.z" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.CMD_FILE.102793878" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.CMD_FILE" valueType="stringList">
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/build_components.opt"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/factory_config.opt"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/build_components.opt"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/ble/stack_util/config/factory_config.opt"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.W.754353788" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.W" valueType="stringList">
                                     <listOptionValue value="unused-function"/>
@@ -211,7 +211,7 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.SEARCH_PATH.916199783" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.SEARCH_PATH" valueType="libPaths">
                                     <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_LIBRARY_PATH}"/>
                                     <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/source"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source"/>
                                     <listOptionValue value="${PROJECT_BUILD_DIR}/syscfg"/>
                                     <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
                                 </option>
@@ -228,7 +228,7 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.447875341" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
                                     <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_SYSCONFIG_MANIFEST}"/>
                                     <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
-                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SOURCE_SDK_INSTALL_DIR}/.metadata/product.json"/>
+                                    <listOptionValue value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/.metadata/product.json"/>
                                 </option>
                             </tool>
                         </toolChain>
