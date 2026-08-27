@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>CS&lowbar;Handover&lowbar;TimeSync&lowbar;Demo Readme</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="cs_handover_timesync_demo-readme">CS_Handover_TimeSync_Demo Readme</h1>
+<h1 id="硬件">硬件</h1>
+<ol>
+<li>3x LP-EM-CC2745R10-Q1 Launchpad</li>
+</ol>
+<h1 id="软件环境">软件环境</h1>
+<ol>
+<li>Code Composer Studio 集成开发环境</li>
+<li>SimpleLink Low Power F3 SDK (9.20.01.21) or Above</li>
+<li>Python(可选)</li>
+</ol>
+<h1 id="步骤">步骤</h1>
+<ol>
+<li>编译<code>car_node_tsa</code>及<code>car_node_tso</code>工程，并烧录到其中的两个CC2745 Launchpad作为CS_Handover的节点</li>
+<li>将这两个CC2745的板子按下方进行GPIO连接。
+<table>
+<thead>
+<tr>
+<th>CC2745-Launchpad 1</th>
+<th>CC2745 Launchpad 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIO21</td>
+<td>DIO22</td>
+</tr>
+<tr>
+<td>DIO22</td>
+<td>DIO21</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>将所附key_node out文件，烧录到第三块CC2745 Launchpad.</li>
+<li>Key_node会搜索CS_Handover的TSO节点发出的光波广播并进行连接，连接后TSO节点会发起CS。</li>
+<li>使用串口工具观察结果两个节点的串口，波特率为<code>3000000</code>，可以观察到CS结果在两个节点间交替打印。</li>
+</ol>
+<h1 id="注意">注意</h1>
+<ol>
+<li>Channel Sounding的参数默认使用2x2的天线，可以在car node里面进行调整，参考channel sounding demo目录下的readme。</li>
+</ol>
+
+            
+            
+        </body>
+        </html>

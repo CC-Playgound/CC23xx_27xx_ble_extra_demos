@@ -19,8 +19,8 @@
    |DIO21|DIO22|
    |DIO22|DIO21|
    |GND|GND|
-3. 编译key_node工程，将device name改为`Key Node 0216`，并烧录到第三块CC2745 Launchpad.
-4. CS_Handover的tso节点会自动搜索`Key Node 0216`广播并进行连接，连接后会发起CS。
+3. 将所附key_node out文件，烧录到第三块CC2745 Launchpad.
+4. Key_node会搜索CS_Handover的TSO节点发出的光波广播并进行连接，连接后TSO节点会发起CS。
 5. 使用串口工具观察结果两个节点的串口，波特率为`3000000`，可以观察到CS结果在两个节点间交替打印。
 
 # 注意
