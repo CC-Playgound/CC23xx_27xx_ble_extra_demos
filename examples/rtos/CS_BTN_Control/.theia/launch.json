@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "car_node_CC2745_920",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "car_node_CC2745_920",
+                "resourceId": "/car_node_CC2745_920"
+            },
+            "connections": [
+                {
+                    "name": "Texas Instruments XDS110 USB Debug Probe",
+                    "cores": [
+                        {
+                            "name": "Cortex_M33_0",
+                            "debuggerSettings": {
+                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n<PropertyValues/>\n"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

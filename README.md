@@ -101,6 +101,10 @@ Demo基于CC23xx或CC27xx开发板，根据工程所在文件夹名称选择对�
       <td>LP-EM-CC2745R10-Q1</td>
       <td>实现两路基于不同地址类型的广播</td>
     </tr>
-
+    <tr>
+      <td>CS_BTN_control</td>
+      <td>LP-EM-CC2745R10-Q1</td>
+      <td>基于car_node实现用按钮控制CS的启停</td>
+    </tr>
   </tbody>
 </table>
