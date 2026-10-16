@@ -10,7 +10,7 @@ Target Device: cc23xx
 
 ******************************************************************************
 
- Copyright (c) 2022-2025, Texas Instruments Incorporated
+ Copyright (c) 2022-2026, Texas Instruments Incorporated
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -130,9 +130,7 @@ BLEAppUtil_timerHandle paramUpdateReqClockHandle;
 
 #ifdef DISABLE_CSA2
 //! Store handle needed for each advertise set
-extern uint8 peripheralAdvHandle_1;
-//! Advertise param, needed for each advertise set, Generate by Sysconfig
-extern const BLEAppUtil_AdvStart_t advSetStartParamsSet_1;
+extern uint8_t peripheralAdvHandles[BLE_CONFIG_NUM_ADV_SETS];
 #endif // #ifdef DISABLE_CSA2
 
 //*****************************************************************************
@@ -158,10 +156,10 @@ void sendParamUpdateReq(void)
     gapUpdateLinkParamReq_t pParamUpdateReq =
     {
         .connectionHandle = linkDB_NumActive() - 1, // The latest connection
-        .intervalMin = 400,
-        .intervalMax = 800,
+        .intervalMin = 400, // 500ms
+        .intervalMax = 800, // 1s
         .connLatency = 0,
-        .connTimeout = 600
+        .connTimeout = 600   // 6s
     };
 
     // Send a connection param update request
@@ -380,7 +378,7 @@ void Connection_HciGAPEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
               {
                   // It is safer to move BLEAppUtil_advStart to here if feature set is modified
                   // to avoid connection is established before feature set is changed.
-                  BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
+                  BleConfig_startAdvSets(peripheralAdvHandles, NULL, BLE_CONFIG_NUM_ADV_SETS);
                   MenuModule_printf(APP_MENU_CONN_EVENT, 0, "Feature set change - CSA#2 disabled");
                   break;
               }

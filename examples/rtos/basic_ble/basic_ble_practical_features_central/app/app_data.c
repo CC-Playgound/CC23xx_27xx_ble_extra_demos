@@ -9,7 +9,7 @@ Target Device: cc23xx
 
 ******************************************************************************
 
- Copyright (c) 2022-2025, Texas Instruments Incorporated
+ Copyright (c) 2022-2026, Texas Instruments Incorporated
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -101,13 +101,13 @@ static void GATT_EventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
   gattMsgEvent_t *gattMsg = ( gattMsgEvent_t * )pMsgData;
   switch ( gattMsg->method )
   {
-      case ATT_FLOW_CTRL_VIOLATED_EVENT:
+    case ATT_FLOW_CTRL_VIOLATED_EVENT:
       {
           MenuModule_printf(APP_MENU_PROFILE_STATUS_LINE, 0, "GATT status: ATT flow control is violated");
       }
       break;
 
-      case ATT_MTU_UPDATED_EVENT:
+    case ATT_MTU_UPDATED_EVENT:
       {
           MenuModule_printf(APP_MENU_PROFILE_STATUS_LINE, 0, "GATT status: ATT MTU update to %d",
                             gattMsg->msg.mtuEvt.MTU);

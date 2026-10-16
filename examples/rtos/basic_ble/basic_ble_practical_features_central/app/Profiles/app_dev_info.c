@@ -9,7 +9,7 @@ Target Device: cc23xx
 
 ******************************************************************************
 
- Copyright (c) 2022-2025, Texas Instruments Incorporated
+ Copyright (c) 2022-2026, Texas Instruments Incorporated
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -88,9 +88,10 @@ bStatus_t DevInfo_start(void)
 
   devAddr = GAP_GetDevAddress( TRUE );
 
-  memcpy( &systemId[0], &devAddr[0], 3 );   // use 6 bytes of device address for 8 bytes of system ID value
-  memset( &systemId[3], 0xFFFE, 2 );        // set middle bytes to 0xFFFE
-  memcpy( &systemId[5], &devAddr[3], 3 );   // shift three bytes up
+  memcpy( &systemId[0], &devAddr[0], 3 );   // Use 6 bytes of device address for 8 bytes of system ID value
+  systemId[3] = 0xFF; // Set middle bytes to 0xFFFE
+  systemId[4] = 0xFE; // Set middle bytes to 0xFFFE
+  memcpy( &systemId[5], &devAddr[3], 3 );   // Shift three bytes up
 
   // Set Device Info Service System ID Parameter
   status = DevInfo_setParameter( DEVINFO_SYSTEM_ID, DEVINFO_SYSTEM_ID_LEN, systemId );

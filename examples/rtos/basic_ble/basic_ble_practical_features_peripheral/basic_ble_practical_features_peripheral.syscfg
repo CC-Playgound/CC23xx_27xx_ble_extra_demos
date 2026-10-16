@@ -1,118 +1,235 @@
-/**
- * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
- * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
- * @cliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5RKP" --part "Default" --package "RKP" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@9.11.00.18"
- * @v2CliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5" --package "VQFN (RKP)" --variant "CC2340R52" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@9.11.00.18"
- * @versions {"tool":"1.23.2+4156"}
+/*
+ * Copyright (c) 2018, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+// @cliArgs --board /ti/boards/LP_EM_CC2340R5 --rtos freertos
+
+/*
+ *  basic_ble.syscfg
  */
 
-/**
- * Import the modules used in this configuration.
- */
-const FreeRTOS    = scripting.addModule("/freertos/FreeRTOS");
-const ble         = scripting.addModule("/ti/ble/ble");
-const CCFG        = scripting.addModule("/ti/devices/CCFG");
-const rfdesign    = scripting.addModule("/ti/devices/radioconfig/rfdesign");
-const Display     = scripting.addModule("/ti/display/Display");
-const Display1    = Display.addInstance();
-const AESCCM      = scripting.addModule("/ti/drivers/AESCCM");
-const AESCCM1     = AESCCM.addInstance();
-const AESCTRDRBG  = scripting.addModule("/ti/drivers/AESCTRDRBG");
-const AESCTRDRBG1 = AESCTRDRBG.addInstance();
-const AESECB      = scripting.addModule("/ti/drivers/AESECB");
-const AESECB1     = AESECB.addInstance();
-const ECDH        = scripting.addModule("/ti/drivers/ECDH");
-const ECDH1       = ECDH.addInstance();
-const GPIO        = scripting.addModule("/ti/drivers/GPIO");
-const GPIO1       = GPIO.addInstance();
-const GPIO2       = GPIO.addInstance();
-const NVS         = scripting.addModule("/ti/drivers/NVS");
-const NVS1        = NVS.addInstance();
-const Power       = scripting.addModule("/ti/drivers/Power");
-const RCL         = scripting.addModule("/ti/drivers/RCL");
-const RNG         = scripting.addModule("/ti/drivers/RNG");
-const RNG1        = RNG.addInstance();
-const Button      = scripting.addModule("/ti/drivers/apps/Button", {}, false);
-const Button1     = Button.addInstance();
-const Button2     = Button.addInstance();
-const Settings    = scripting.addModule("/ti/posix/freertos/Settings");
+/* ======== Example Configuration ======== */
+const lpName = system.getScript("/ti/ble/ble_common.js").getLaunchPadName();
+var needsDisplay = true;
+var needsButtons = true;
+var needsLeds = true;
+var needsNvs = true;
+var needsOad = false;
+var heapSize = 0x00004D50;
+var timerStackSize = 0x00000190;
+var idleStackSize = 0x00000130;
 
-/**
- * Write custom configuration values to the imported modules.
- */
-FreeRTOS.heapSize       = 0x00004D50;
-FreeRTOS.timerStackSize = 0x00000190;
-FreeRTOS.idleStackSize  = 0x00000130;
+/* ======== BLE ======== */
+var ble = scripting.addModule("/ti/ble/ble");
+ble.deviceRole = "PERIPHERAL_CFG";
+ble.basicBLE = true;
+ble.disDevBySerUuid = true;
+ble.maxConnNum = 1;
+ble.deviceName = "Basic BLE project";
+ble.numOfAdvSets = 1;
+// Gap Advertising Flags
+ble.advSet1.advData1.GAP_ADTYPE_FLAGS = true;
+ble.advSet1.advData1.advertisingFlags = ["GAP_ADTYPE_FLAGS_BREDR_NOT_SUPPORTED","GAP_ADTYPE_FLAGS_GENERAL"];
+// More 16-bit UUIDs available
+ble.advSet1.advData1.GAP_ADTYPE_16BIT_MORE = true;
+ble.advSet1.advData1.numOfUUIDs16More = 1;
+ble.advSet1.advData1.UUID016More = 65520;
+// Complete local name
+ble.advSet1.scanRes1.GAP_ADTYPE_LOCAL_NAME_COMPLETE = true;
+const connIntervalRange = system.getScript("/ti/ble/ble_common.js").getPeripheralConnIntervalRange();
+ble.advSet1.scanRes1[connIntervalRange] = true;
+// Min Connection Interval
+ble.advSet1.scanRes1.minConnInterval = 100;
+// Max Connection Interval
+ble.advSet1.scanRes1.maxConnInterval = 130;
+// TX Power Level
+ble.advSet1.scanRes1.GAP_ADTYPE_POWER_LEVEL = true;
 
-ble.basicBLE                                                   = true;
-ble.disDevBySerUuid                                            = true;
-ble.numOfAdvSets                                               = 1;
-ble.numOfDefAdvSets                                            = 1;
-ble.deviceName                                                 = "Basic BLE peri";
-ble.addressMode                                                = "ADDRMODE_PUBLIC";
-ble.radioConfig.codeExportConfig.$name                         = "ti_devices_radioconfig_code_export_param0";
-ble.adcNoiseConfig.codeExportConfig.$name                      = "ti_devices_radioconfig_code_export_param1";
-ble.bleCsConfig.codeExportConfig.$name                         = "ti_devices_radioconfig_code_export_param2";
-ble.connUpdateParamsPeripheral.$name                           = "ti_ble_general_ble_conn_update_params0";
-ble.advSet1.$name                                              = "ti_ble_broadcaster_advertisement_set0";
-ble.advSet1.advParam1.$name                                    = "ti_ble_broadcaster_advertisement_params0";
-ble.advSet1.advData1.$name                                     = "ti_ble_broadcaster_advertisement_data0";
-ble.advSet1.advData1.GAP_ADTYPE_16BIT_MORE                     = true;
-ble.advSet1.advData1.numOfUUIDs16More                          = 1;
-ble.advSet1.advData1.UUID016More                               = 0xFFF0;
-ble.advSet1.scanRes1.$name                                     = "ti_ble_broadcaster_advertisement_data1";
-ble.advSet1.scanRes1.GAP_ADTYPE_PERIPHERAL_CONN_INTERVAL_RANGE = true;
+/* ======== RCL ======== */
+const RCL = scripting.addModule("/ti/drivers/RCL");
+if (typeof rclPbeGpoMask !== 'undefined')
+{
+    RCL.pbeGpoMask = rclPbeGpoMask;
+}
+if (typeof rclUseCase !== 'undefined')
+{
+    RCL.useCase = rclUseCase;
+}
+if (typeof rclSignals !== 'undefined')
+{
+    RCL.signals = rclSignals;
 
-CCFG.ccfgTemplate.$name = "ti_devices_CCFG_CCFGCC23X0Template0";
+    if (typeof pbegpo2Pin !== 'undefined' && typeof pbegpo3Pin !== 'undefined')
+    {
+        RCL.lrfGpio.pbegpo2Pin.$assign = pbegpo2Pin;
+        RCL.lrfGpio.pbegpo3Pin.$assign = pbegpo3Pin;
+        RCL.pbegpo2PinInstance.initialOutputState = "High";
+    }
+}
 
-Display1.$name                    = "CONFIG_Display_0";
-Display1.$hardware                = system.deviceData.board.components.XDS110UART;
-Display1.enableANSI               = true;
-Display1.uartBufferSize           = 128;
-Display1.uart.$name               = "CONFIG_DISPLAY_UART";
-Display1.uart.txPinInstance.$name = "CONFIG_PIN_UART_TX";
-Display1.uart.rxPinInstance.$name = "CONFIG_PIN_UART_RX";
+/* ======== POWER ======== */
+var Power = scripting.addModule("/ti/drivers/Power");
+if (typeof needsPowerWfi !== 'undefined' && needsPowerWfi)
+{
+    if (lpName.match(/CC27\d\d/))
+    {
+        Power.policyFunction = "PowerCC27XX_doWFI";
+    }
+    else if (lpName.match(/CC23\d\d/))
+    {
+        Power.policyFunction = "PowerCC23X0_doWFI";
+    }
+}
 
-AESCCM1.$name = "CONFIG_AESCCM0";
-
-AESCTRDRBG1.$name = "CONFIG_AESCTRDRBG_0";
-
-AESECB1.$name = "CONFIG_AESECB0";
-
-ECDH1.$name = "CONFIG_ECDH0";
-
-GPIO1.$hardware = system.deviceData.board.components.LED_GREEN;
-GPIO1.$name     = "CONFIG_GPIO_LED_GREEN";
-
-GPIO2.$hardware = system.deviceData.board.components.LED_RED;
-GPIO2.$name     = "CONFIG_GPIO_LED_RED";
-
-NVS1.$name                    = "CONFIG_NVSINTERNAL";
-NVS1.internalFlash.$name      = "ti_drivers_nvs_NVSLPF30";
-NVS1.internalFlash.regionBase = 0x7D000;
-NVS1.internalFlash.regionSize = 0x3000;
-
+/* ======== RNG ======== */
+var RNG = scripting.addModule("/ti/drivers/RNG");
 RNG.rngReturnBehavior = "RNG_RETURN_BEHAVIOR_BLOCKING";
 
-RNG1.$name = "CONFIG_RNG_0";
+/* ======== RF Design ======== */
+var rfDesign = scripting.addModule("ti/devices/radioconfig/rfdesign");
+const rfDesignSettings = system.getScript("/ti/common/lprf_rf_design_settings.js").rfDesignSettings;
+for(var setting in rfDesignSettings)
+{
+    rfDesign[setting] = rfDesignSettings[setting];
+}
 
-Button1.$name     = "CONFIG_BUTTON_0";
-Button1.$hardware = system.deviceData.board.components["BTN-1"];
+/* ======== Device ======== */
+var device = scripting.addModule("ti/devices/CCFG");
+const ccfgSettings = system.getScript("/ti/common/lprf_ccfg_settings.js").ccfgSettings;
+for(var setting in ccfgSettings)
+{
+    device[setting] = ccfgSettings[setting];
+}
 
-Button2.$name     = "CONFIG_BUTTON_1";
-Button2.$hardware = system.deviceData.board.components["BTN-2"];
+/* ======== FreeRTOS ======== */
+const FreeRTOS = scripting.addModule("/freertos/FreeRTOS");
+const Settings = scripting.addModule("/ti/posix/freertos/Settings");
+const bleCommon = system.getScript("/ti/ble/.meta/ble_common.js");
 
-/**
- * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
- * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
- * re-solve from scratch.
- */
-Display1.uart.uart.$suggestSolution              = "UART0";
-Display1.uart.uart.dmaTxChannel.$suggestSolution = "DMA_CH1";
-Display1.uart.uart.dmaRxChannel.$suggestSolution = "DMA_CH0";
-Display1.uart.uart.txPin.$suggestSolution        = "boosterpack.4";
-Display1.uart.uart.rxPin.$suggestSolution        = "boosterpack.3";
-GPIO1.gpioPin.$suggestSolution                   = "boosterpack.40";
-GPIO2.gpioPin.$suggestSolution                   = "boosterpack.39";
-Button1.button.$suggestSolution                  = "boosterpack.13";
-Button2.button.$suggestSolution                  = "boosterpack.12";
+FreeRTOS.heapSize = heapSize;
+FreeRTOS.maxPriorities = 10;
+
+// configure Timer task priority = maxPriorities - 1 - same level as Stack priority
+bleCommon.configureTimerTaskPriority(FreeRTOS); 
+
+if (lpName.match(/CC27\d\d/))
+{
+    FreeRTOS.heapSize = 0x00010000;
+}
+if (lpName == "LP_EM_CC2340R53")
+{
+    FreeRTOS.heapSize = 0x0000A000;
+}
+FreeRTOS.timerStackSize = timerStackSize;
+FreeRTOS.idleStackSize = idleStackSize;
+
+/* ======== NVS ======== */
+var NVS = scripting.addModule("/ti/drivers/NVS");
+if (needsNvs)
+{
+    var nvs = NVS.addInstance();
+    nvs.internalFlash.regionBase = system.getScript("/ti/ble/ble_common.js").getBondNVBaseAddress();
+    nvs.internalFlash.regionSize = 0x3000;
+    nvs.$name = "CONFIG_NVSINTERNAL";
+}
+
+/* ======== Display (conditional) ======== */
+if (needsDisplay)
+{
+    var Display = scripting.addModule("/ti/display/Display");
+    var displayUART = Display.addInstance();
+    displayUART.$hardware = system.deviceData.board.components.XDS110UART;
+    displayUART.enableANSI = true;
+    displayUART.uartBufferSize = 128;
+    displayUART.uart.txPinInstance.outputState = "High";
+    displayUART.uart.$name = "CONFIG_UART2_0";
+    displayUART.uart.txPinInstance.$name = "CONFIG_PIN_UART_TX";
+}
+
+/* ======== UART for NPI (conditional) ======== */
+if (typeof needsUartNpi !== 'undefined' && needsUartNpi)
+{
+    var UART = scripting.addModule("/ti/drivers/UART2", {}, false);
+    var UART1 = UART.addInstance();
+    UART1.$hardware = system.deviceData.board.components.XDS110UART;
+    UART1.txPinInstance.initialOutputState = "High";
+    UART1.$name = "CONFIG_UART2_0";
+    ble.disableDisplayModule = true;
+}
+
+/* ======== Buttons (conditional) ======== */
+if (needsButtons)
+{
+    const Button = scripting.addModule("/ti/drivers/apps/Button", {}, false);
+    const Button1 = Button.addInstance();
+    const Button2 = Button.addInstance();
+    Button1.$name = "CONFIG_BUTTON_0";
+    Button1.$hardware = system.deviceData.board.components["BTN-1"];
+    Button2.$name = "CONFIG_BUTTON_1";
+    Button2.$hardware = system.deviceData.board.components["BTN-2"];
+}
+
+/* ======== LEDs (conditional) ======== */
+if (needsLeds)
+{
+    const GPIO = scripting.addModule("/ti/drivers/GPIO");
+    const GPIO2 = GPIO.addInstance();
+    GPIO2.$hardware = system.deviceData.board.components.LED_GREEN;
+    GPIO2.$name = "CONFIG_GPIO_LED_GREEN";
+    const GPIO3 = GPIO.addInstance();
+    GPIO3.$hardware = system.deviceData.board.components.LED_RED;
+    GPIO3.$name = "CONFIG_GPIO_LED_RED";
+}
+
+/* ======== OAD (CC23xx) ======== */
+/* OAD needs to be added after Bond NVS so Bond NVS handle will remain '0' */
+if(needsOad && !(lpName.match(/CC27\d\d/)))
+{
+    /* Persistent is enabled differently, as it is relevant only within the persistent example. */
+    if (oadMethod == "OAD_APP_PERSISTENT")
+    {
+        ble.enableOad = true;
+        ble.enablePersistentOad = true;
+        ble.mcubootSignVersion1 = "0.0.1";
+        ble.oadMethod = "NONE";
+    }
+    else if (oadMethod == "MULTISTEP_OAD")
+    {
+        /* For multistep-oad, we need to specifically inset the oadMethod as this string is used
+           by the prebuild script in order to inject the halfModeBuild to the sysconfig file */
+        ble.enableOad = true;
+        ble.oadMethod = "MULTISTEP_OAD";
+    }
+    else
+    {
+        ble.enableOad = true;
+        ble.oadMethod = oadMethod;
+    }
+}

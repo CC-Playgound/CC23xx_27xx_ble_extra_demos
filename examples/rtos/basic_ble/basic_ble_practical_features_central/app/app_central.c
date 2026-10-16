@@ -25,7 +25,7 @@ Target Device: cc23xx
 
 ******************************************************************************
 
- Copyright (c) 2022-2025, Texas Instruments Incorporated
+ Copyright (c) 2022-2026, Texas Instruments Incorporated
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -192,7 +192,7 @@ void Central_ScanEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
             uint8_t* p_mac = adv_report->addr;
 
             // This is just a demo searching for a certain address
-            if (p_mac[0] == 0xD9 && p_mac[1] == 0xA2)
+            if (p_mac[0] == 0xD2 && p_mac[1] == 0xA2)
             {
                 BLEAppUtil_scanStop();
                 BLEAppUtil_ConnectParams_t connParams =

@@ -7,7 +7,7 @@ Target Device: cc23xx
 
 ******************************************************************************
 
- Copyright (c) 2022-2025, Texas Instruments Incorporated
+ Copyright (c) 2022-2026, Texas Instruments Incorporated
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -51,6 +51,7 @@ Target Device: cc23xx
 #include "ti/ble/app_util/menu/menu_module.h"
 #include <app_main.h>
 #include "ti_ble_config.h"
+
 
 #if !defined(Display_DISABLE_ALL)
 //*****************************************************************************
@@ -305,7 +306,14 @@ void Menu_connectToDeviceCB(uint8 index)
 
     // Get the scan results list
     App_scanResults *menuScanRes;
-    uint8 size = Scan_getScanResList(&menuScanRes);
+    uint8 numResults = Scan_getScanResList(&menuScanRes);
+
+    if (numResults == 0 || index >= numResults)
+    {
+        MenuModule_printf(APP_MENU_GENERAL_STATUS_LINE, 0, "Call Status: Connect = "
+                          MENU_MODULE_COLOR_BOLD MENU_MODULE_COLOR_RED "No scan results" MENU_MODULE_COLOR_RESET);
+        return;
+    }
 
     // Set the connection parameters
     BLEAppUtil_ConnectParams_t connParams =
@@ -474,10 +482,10 @@ void Menu_paramUpdateCB(uint8 index)
     gapUpdateLinkParamReq_t pParamUpdateReq =
     {
      .connectionHandle = menuCurrentConnHandle,
-     .intervalMin = 400,
-     .intervalMax = 800,
-     .connLatency = 0,
-     .connTimeout = 600
+     .intervalMin = DEFAULT_DESIRED_MIN_CONN_INTERVAL,
+     .intervalMax = DEFAULT_DESIRED_MAX_CONN_INTERVAL,
+     .connLatency = DEFAULT_DESIRED_PERIPHERAL_LATENCY,
+     .connTimeout = DEFAULT_DESIRED_CONN_TIMEOUT
     };
 
     // Send a connection param update request
@@ -558,5 +566,6 @@ bStatus_t Menu_start()
 #endif // #if ( HOST_CONFIG & ( CENTRAL_CFG | OBSERVER_CFG | PERIPHERAL_CFG ) )
 
 #endif // #if !defined(Display_DISABLE_ALL)
+
   return status;
 }

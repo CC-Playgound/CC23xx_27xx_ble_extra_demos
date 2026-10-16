@@ -17,9 +17,9 @@
             </property>
             <property Type="hiddenfield" Value="1" id="SWD.SWJ_DP_DEFAULT_MODE"/>
             <property Type="choicelist" Value="0" id="SWD.APPY_PIN_RESET_DORMANT_WAKEUP"/>
-            <property id="Debug Probe Selection" Type="choicelist" Value="1">
+            <property id="Debug Probe Selection" Type="choicelist" Value="0">
                 <choice Name="Select by serial number" value="0">
-                    <property id="-- Enter the serial number" Type="stringfield" Value="LS470FXM"/>
+                    <property id="-- Enter the serial number" Type="stringfield" Value="LS4104FD"/>
                 </choice>
             </property>
             <platform XML_version="1.2" id="platform_0">

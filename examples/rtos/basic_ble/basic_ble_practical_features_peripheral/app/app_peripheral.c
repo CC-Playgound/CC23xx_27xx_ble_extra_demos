@@ -27,7 +27,7 @@ Target Device: cc23xx
 
 ******************************************************************************
 
- Copyright (c) 2022-2025, Texas Instruments Incorporated
+ Copyright (c) 2022-2026, Texas Instruments Incorporated
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -99,30 +99,8 @@ BLEAppUtil_EventHandler_t peripheralAdvHandler =
                       BLEAPPUTIL_ADV_END_AFTER_DISABLE
 };
 
-//! Store handle needed for each advertise set
-uint8 peripheralAdvHandle_1;
-
-//! Advertise param, needed for each advertise set, Generate by Sysconfig
-const BLEAppUtil_AdvInit_t advSetInitParamsSet_1 =
-{
-    /* Advertise data and length */
-    .advDataLen        = sizeof(advData1),
-    .advData           = advData1,
-
-    /* Scan respond data and length */
-    .scanRespDataLen   = sizeof(scanResData1),
-    .scanRespData      = scanResData1,
-
-    .advParam          = &advParams1
-};
-
-const BLEAppUtil_AdvStart_t advSetStartParamsSet_1 =
-{
-    /* Use the maximum possible value. This is the spec-defined maximum for */
-    /* directed advertising and infinite advertising for all other types */
-    .enableOptions         = GAP_ADV_ENABLE_OPTIONS_USE_MAX,
-    .durationOrMaxEvents   = 0
-};
+//! Stores adv handles
+uint8_t peripheralAdvHandles[BLE_CONFIG_NUM_ADV_SETS];
 
 //*****************************************************************************
 //! Functions
@@ -189,19 +167,19 @@ void Peripheral_GAPConnEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
             if(linkDB_NumActive() < linkDB_NumConns())
             {
                 /* Start advertising since there is room for more connections */
-                BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
+                BleConfig_startAdvSets(peripheralAdvHandles, NULL, BLE_CONFIG_NUM_ADV_SETS);
             }
             else
             {
                 /* Stop advertising since there is no room for more connections */
-                BLEAppUtil_advStop(peripheralAdvHandle_1);
+                BleConfig_stopAdvSets(peripheralAdvHandles, NULL, BLE_CONFIG_NUM_ADV_SETS);
             }
             break;
         }
 
         case BLEAPPUTIL_LINK_TERMINATED_EVENT:
         {
-            BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
+            BleConfig_startAdvSets(peripheralAdvHandles, NULL, BLE_CONFIG_NUM_ADV_SETS);
             break;
         }
 
@@ -239,20 +217,20 @@ bStatus_t Peripheral_start()
         return(status);
     }
 
-    status = BLEAppUtil_initAdvSet(&peripheralAdvHandle_1, &advSetInitParamsSet_1);
-    if(status != SUCCESS)
+    // Initiate the advertise sets
+    uint8_t peripheralAdvHandlesStatuses[BLE_CONFIG_NUM_ADV_SETS];
+    BleConfig_initAdvSets(peripheralAdvHandles, peripheralAdvHandlesStatuses);
+    for (int i = 0; i < BLE_CONFIG_NUM_ADV_SETS; i++)
     {
-        // Return status value
-        return(status);
+        // Return the first FAILURE status value
+        if (peripheralAdvHandlesStatuses[i] != SUCCESS)
+        {
+            return(peripheralAdvHandlesStatuses[i]);
+        }
     }
-
+    
 #ifndef DISABLE_CSA2
-    status = BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
-    if(status != SUCCESS)
-    {
-        // Return status value
-        return(status);
-    }
+    BleConfig_startAdvSets(peripheralAdvHandles, NULL, BLE_CONFIG_NUM_ADV_SETS);
 #endif // #ifdef DISABLE_CSA2
 
     // Return status value

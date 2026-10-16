@@ -9,7 +9,7 @@ Target Device: cc23xx
 
 ******************************************************************************
 
- Copyright (c) 2022-2025, Texas Instruments Incorporated
+ Copyright (c) 2022-2026, Texas Instruments Incorporated
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -151,7 +151,7 @@ bStatus_t SimpleGatt_start( void )
 
   // Setup the Simple GATT Characteristic Values
   // For more information, see the GATT and GATTServApp sections in the User's Guide:
-  // http://software-dl.ti.com/lprf/ble5stack-latest/
+  // All the documentation and collateral applicable can be found on TI Developer Zone - https://dev.ti.com/
   {
     uint8_t charValue1 = 1;
     uint8_t charValue2 = 2;
