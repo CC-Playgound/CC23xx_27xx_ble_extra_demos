@@ -32,7 +32,7 @@ Before running the demo, the user will need the following components:
 
 #### Firmware Requirements
 
-- [SimpleLink Low Power F3 SDK (9.11.00.18)](https://www.ti.com/tool/download/SIMPLELINK-LOWPOWER-F3-SDK)
+- [SimpleLink Low Power F3 SDK (9.21.00.36.LTS)](https://www.ti.com/tool/download/SIMPLELINK-LOWPOWER-F3-SDK/9.21.00.36.LTS)
 
 #### Mobile Application Requirements
 
@@ -60,7 +60,7 @@ All the code required for this demo is inside ``app_connection.c``.
 
 ## Create a clock instance
 
-SimpleLink F3 SDK(9.11 and above) provides APIS to easily creating a one-time or periodic clock to execute a delayed or periodic task. API declarations are inside ``<SDK_INSTALL_DIR>\source\ti\ble\app_util\framework\bleapputil_timers.h`` and definitions are inside ``<SDK_INSTALL_DIR>\source\ti\ble\app_util\framework\src\bleapputil_timers.c``.
+SimpleLink F3 SDK provides APIS to easily creating a one-time or periodic clock to execute a delayed or periodic task. API declarations are inside ``<SDK_INSTALL_DIR>\source\ti\ble\app_util\framework\bleapputil_timers.h`` and definitions are inside ``<SDK_INSTALL_DIR>\source\ti\ble\app_util\framework\src\bleapputil_timers.c``.
 
 In this demo, ``BLEAppUtil_startTimer`` is called in ``Connection_ConnEventHandler`` -> ``case BLEAPPUTIL_LINK_ESTABLISHED_EVENT`` to create a one-time clock with 6000ms timeout value. The function pointer of ``sendParamUpdateReq`` is passed as an input parameter to allow the clock callback function to pass the actual handler function to the BLE stack message queue.
 
@@ -91,7 +91,7 @@ In ``Connection_ConnEventHandler`` -> ``case BLEAPPUTIL_LINK_TERMINATED_EVENT``,
 - Call ``BLEAppUtil_invokeFunctionNoData`` to pass the actual handler function to the BLE stack message queue
 - Execute the handler function to send parameter update request from BLE task context
 
-The reason for this implementation is that all BLE APIs should be called from an icall-enabled task context, rather than a non-icall task or a callback function. Detail of the limitation can be found in the [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/the-application-cc23xx.html#icall).
+The reason for this implementation is that all BLE APIs should be called from an icall-enabled task context, rather than a non-icall task or a callback function. Detail of the limitation can be found in the [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.21.00.36.LTS/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/the-application-cc23xx.html#icall).
 
 ```
 void paramUpdateReqTimeoutCB(BLEAppUtil_timerHandle timerHandle, BLEAppUtil_timerTermReason_e reason, void *pData)
@@ -114,10 +114,10 @@ void sendParamUpdateReq(void)
     gapUpdateLinkParamReq_t pParamUpdateReq =
     {
         .connectionHandle = linkDB_NumActive() - 1, // The latest connection
-        .intervalMin = 400,
-        .intervalMax = 800,
+        .intervalMin = 400, // 500ms
+        .intervalMax = 800, // 1s
         .connLatency = 0,
-        .connTimeout = 600
+        .connTimeout = 600  // 6s
     };
 
     // Send a connection param update request
@@ -135,9 +135,9 @@ Disabling CSA#2
 
 The code under pre-defined symbol ``DISABLE_CSA2`` demonstrates how to disable a certain LE feature. This is needed for compatibility with older BLE stack versions or user specified applications.
 
-The [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/channel-selection-algorithm-number-two.html#channel-selection-algorithm-2) already provides a guide to disable CSA#2. However since the involved HCI events can be confusing for users, this demo showcases more detailed steps to handle the HCI events. The steps also apply to other LE feature set bits, moreover can be extended to handle other HCI commands.
+The [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.21.00.36.LTS/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/channel-selection-algorithm-number-two.html#channel-selection-algorithm-2) already provides a guide to disable CSA#2. However since the involved HCI events can be confusing for users, this demo showcases more detailed steps to handle the HCI events. The steps also apply to other LE feature set bits, moreover can be extended to handle other HCI commands.
 
-The detailed HCI commands and events description can be found in the [Host Controller Interface (HCI)](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/hci-cc23xx.html#host-controller-interface-hci) section in BLE5-Stack User's Guide.
+The detailed HCI commands and events description can be found in the [Host Controller Interface (HCI)](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.21.00.36.LTS/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/hci-cc23xx.html#host-controller-interface-hci) section in BLE5-Stack User's Guide.
 
 The code required for this demo is inside ``app_connection.c`` and ``app_peripheral.c``. To change a feature set bit, firstly use ``HCI_LE_ReadLocalSupportedFeaturesCmd`` to read the currently supported local LE features:
 
@@ -245,7 +245,7 @@ void Connection_HciGAPEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
               {
                   // It is safer to move BLEAppUtil_advStart to here if feature set is modified
                   // to avoid connection is established before feature set is changed.
-                  BLEAppUtil_advStart(peripheralAdvHandle_1, &advSetStartParamsSet_1);
+                  BleConfig_startAdvSets(peripheralAdvHandles, NULL, BLE_CONFIG_NUM_ADV_SETS);
                   MenuModule_printf(APP_MENU_CONN_EVENT, 0, "Feature set change - CSA#2 disabled");
                   break;
               }
@@ -260,12 +260,12 @@ void Connection_HciGAPEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
         ...
 ```
 
-Last but not least, it is suggested to move the call of ``BLEAppUtil_advStart`` to the event handler to avoid the case of establishing a connection before the change of feature set. In a rare case the device will connect to a peer device before the feature set change is finished, this will misleading the peer device to use a wrong feature set which may lead to a connection failure or other unexpected behaviors.
+Last but not least, it is suggested to move the call of ``BleConfig_startAdvSets`` to the event handler to avoid the case of establishing a connection before the change of feature set. In a rare case the device will connect to a peer device before the feature set change is finished, this will misleading the peer device to use a wrong feature set which may lead to a connection failure or other unexpected behaviors.
 
 Register connection event callback to get RSSI
 ==============================================
 
-SimpleLink F3 SDK supports application layer callback for the connection events. The benefit of connection event callback can be found in [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/gap-cc23xx.html#connection-event-callback). The user's guide also provides steps to register for the callback but some key steps are missing. This demo showcases the complete steps to register the connection event callback, and use it to get the RSSI from the connection as an example to users.
+SimpleLink F3 SDK supports application layer callback for the connection events. The benefit of connection event callback can be found in [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.21.00.36.LTS/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/gap-cc23xx.html#connection-event-callback). The user's guide also provides steps to register for the callback but some key steps are missing. This demo showcases the complete steps to register the connection event callback, and use it to get the RSSI from the connection as an example to users.
 
 All the code required for this demo is inside ``app_connection.c``. Firstly, create an event handler struct which will be used to register the application layer callback of connection event:
 

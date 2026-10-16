@@ -30,7 +30,7 @@ Before running the demo, the user will need the following components:
 
 #### Firmware Requirements
 
-- [SimpleLink Low Power F3 SDK (9.11.00.18)](https://www.ti.com/tool/download/SIMPLELINK-LOWPOWER-F3-SDK)
+- [SimpleLink Low Power F3 SDK (9.21.00.36.LTS)](https://www.ti.com/tool/download/SIMPLELINK-LOWPOWER-F3-SDK/9.21.00.36.LTS)
 
 #### Mobile Application Requirements
 
@@ -169,7 +169,7 @@ This demo implements 3 steps to complete the service discovery process:
 
 The code required for this demo is inside ``app_connection.c`` and ``app_central.c``.
 
-A larger MTU is requested from the central device before the service discovery. This is because the packets during service discovery may exceeds the default 27 byte MTU. The demo requests for the largest allowed MTU based on the ``MAX_PDU_SIZE`` setting in SysConfig. The largest allowed MTU is ``MAX_PDU_SIZE`` - 4 because of the L2CAP header size. Refer to [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/gatt-cc23xx.html#maximum-transmission-unit-mtu) for more detail about MTU.
+A larger MTU is requested from the central device before the service discovery. This is because the packets during service discovery may exceeds the default 27 byte MTU. The demo requests for the largest allowed MTU based on the ``MAX_PDU_SIZE`` setting in SysConfig. The largest allowed MTU is ``MAX_PDU_SIZE`` - 4 because of the L2CAP header size. Refer to [BLE5-Stack User's Guide](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.21.00.36.LTS/exports/docs/ble5stack/ble_user_guide/html/ble-stack-5.x/gatt-cc23xx.html#maximum-transmission-unit-mtu) for more detail about MTU.
 
 ```
 void Connection_ConnEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
